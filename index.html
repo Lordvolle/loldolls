@@ -14,23 +14,22 @@ if(typeof Muse == "undefined") window.Muse = {}; window.Muse.assets = {"required
 
 </script>
 	  <script type="text/javascript">
-	  var IsValid = false;
-	  function validate(e) { 
-
- var name = e["name"].value;
- var phone = e["phone"].value;
- var letters = /^[А-Яа-я]+$/;
-    if (name.length<3||!name.match(letters)) {
-        alert("Укажите имя ");
-        return false;
-    }
-	   var phoneno = /^(8|7)(9)[\d]{9}$/;  
-  if(!phone.match(phoneno))    
-  {  
-     alert("Неверный номер. Введите номер в формате 89*********");  
-     return false;  
-  }  
-	IsValid=true;
+	  var IsValid = false; // Для проверки данных
+	  function validate(e) { //Валидация
+		var name = e["name"].value;
+        var phone = e["phone"].value;
+        var letters = /^[А-Яа-я]+$/;
+        if (name.length<3||!name.match(letters)) {
+           alert("Укажите имя ");
+           return false;
+        }
+	    var phoneno = /^(8|7)(9)[\d]{9}$/;  
+        if(!phone.match(phoneno))    
+        {  
+         alert("Неверный номер. Введите номер в формате 89*********");  
+         return false;  
+        }  
+	    IsValid=true;
 }
 </script>
   
@@ -1108,25 +1107,22 @@ function getUrlVars(name) {
       </script>
 
 	  <script type="text/javascript">
-$(document).ready(function(){
-var z =['#form1','#form2','#form3','#form4','#form5','#form6','#form7'];
-for (i = 0; i < z.length; i++) { 
+      $(document).ready(function(){
+          var z =['#form1','#form2','#form3','#form4','#form5','#form6','#form7'];
+          for (i = 0; i < z.length; i++) { 
 
-    $(z[i]).submit(function() { //устанавливаем событие отправки для формы с id=form
-            var form_data = $(this).serialize(); //собераем все данные из формы
+          $(z[i]).submit(function() { //устанавливаем событие отправки для формы с id=formN
+            var form_data = $(this).serialize(); 
 			if(IsValid){
             $.ajax({
-            type: "POST", //Метод отправки
-            url: "send.php", //путь до php фаила отправителя
+            type: "POST",
+            url: "send.php", 
             data: form_data,
 			error: function() {
-                   //код в этом блоке выполняется при успешной отправке сообщения
-				   
-                   alert("Error!");
+                     alert("Что-то пошло не так!");
 				     window.location = location;
             },
-            success: function() {
-                   //код в этом блоке выполняется при успешной отправке сообщения
+            success: function() {                  
 				   window.location = " http://lol.glsender.ru/thanks.html";
             }});}
 			IsValid=false;
